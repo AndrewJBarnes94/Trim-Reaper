@@ -1,1 +1,410 @@
-index page
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Trim-Reaper Landscaping</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background-color: #121212;
+      color: #e0e0e0;
+    }
+
+    .navbar {
+      background-color: #1e1e1e;
+      padding: 15px 20px;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      border-bottom: 2px solid #00ff66;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .nav-logo {
+      font-size: 1.5rem;
+      color: #00ff66;
+      text-decoration: none;
+      font-weight: bold;
+    }
+
+    .nav-links {
+      list-style: none;
+      display: flex;
+      gap: 25px;
+      margin: 0;
+      padding: 0;
+    }
+
+    .nav-links li a {
+      color: #e0e0e0;
+      text-decoration: none;
+      font-weight: 500;
+      transition: color 0.3s;
+    }
+
+    .nav-links li a:hover {
+      color: #00ff66;
+    }
+
+    header {
+      background-color: #1e1e1e;
+      text-align: center;
+      padding: 60px 20px;
+      border-bottom: 2px solid #00ff66;
+    }
+
+    header h1 {
+      color: #ffffff;
+      font-size: 3rem;
+      margin: 0;
+    }
+
+    header p {
+      font-size: 1.2rem;
+      margin-top: 10px;
+      color: #cccccc;
+    }
+
+    .services {
+      padding: 60px 20px;
+      background-color: #121212;
+      text-align: center;
+    }
+
+    .section-title {
+      color: #00ff66;
+      font-size: 2.5rem;
+      margin-bottom: 40px;
+    }
+
+    .service-cards {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 30px;
+  justify-content: center;
+  max-width: 1000px;
+  margin: 0 auto;
+}
+
+    .service-card {
+  background-color: #1e1e1e;
+  border-radius: 12px;
+  padding: 30px 20px;
+  width: 100%;
+  max-width: 280px;
+  text-align: center;
+  box-shadow: 0 0 10px rgba(0, 255, 102, 0.1);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+    .service-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 0 20px rgba(0, 255, 102, 0.4);
+    }
+
+    .service-card i {
+      font-size: 50px;
+      color: #00ff66;
+      margin-bottom: 15px;
+    }
+
+    .service-card h3 {
+      color: #ffffff;
+      font-size: 1.3rem;
+      margin: 10px 0;
+    }
+
+    .service-card p {
+      color: #cccccc;
+      font-size: 1rem;
+      line-height: 1.5;
+    }
+
+    .gallery {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 15px;
+  margin: 30px 0;
+}
+
+.gallery img {
+  width: 100%;
+  border-radius: 8px;
+  object-fit: cover;
+  height: 180px;
+  border: 2px solid #1e1e1e;
+  box-shadow: 0 0 10px rgba(0, 255, 102, 0.1);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.gallery img:hover {
+  transform: scale(1.03);
+  box-shadow: 0 0 15px rgba(0, 255, 102, 0.4);
+}
+
+footer {
+      background-color: #1e1e1e;
+      color: #aaaaaa;
+      text-align: center;
+      padding: 20px;
+      font-size: 0.9rem;
+      border-top: 2px solid #00ff66;
+    }
+
+    .contact {
+  padding: 60px 20px;
+  text-align: center;
+  background-color: #121212;
+}
+
+.contact-form {
+  max-width: 600px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  background-color: #1e1e1e;
+  padding: 30px;
+  border-radius: 12px;
+  box-shadow: 0 0 10px rgba(0, 255, 102, 0.1);
+}
+
+.contact-form .form-group {
+  display: flex;
+  flex-direction: column;
+  text-align: left;
+}
+
+.contact-form label {
+  margin-bottom: 8px;
+  color: #00ff66;
+  font-weight: bold;
+}
+
+.contact-form input,
+.contact-form textarea {
+  padding: 12px;
+  border: 1px solid #333;
+  border-radius: 8px;
+  background-color: #2a2a2a;
+  color: #e0e0e0;
+  font-size: 1rem;
+}
+
+.contact-form button {
+  background-color: #00ff66;
+  color: #121212;
+  border: none;
+  padding: 15px;
+  font-size: 1rem;
+  font-weight: bold;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.contact-form button:hover {
+  background-color: #00cc55;
+}
+
+@media (max-width: 900px) {
+      .service-cards {
+        flex-direction: column;
+        align-items: center;
+      }
+    }
+    .gallery-section {
+    padding: 60px 20px;
+    text-align: center;
+    background-color: #121212;
+  }
+
+  .gallery {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 15px;
+    margin: 30px auto;
+    max-width: 1000px;
+    padding: 0 10px;
+  }
+  .checkbox-group {
+  display: flex;
+  justify-content: center;
+  gap: 60px;
+  flex-wrap: wrap;
+  margin-top: 10px;
+}
+
+  .checkbox-group label {
+    color: #cccccc;
+    font-weight: normal;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    transition: color 0.3s ease;
+  }
+
+  .checkbox-group input[type="checkbox"]:checked + label {
+    color: #00ff66;
+  }
+
+  .checkbox-group {
+  display: flex;
+  justify-content: center;
+  gap: 60px;
+  flex-wrap: wrap;
+  margin-top: 10px;
+}
+
+  .checkbox-column {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  min-width: 220px;
+}
+
+  .checkbox-group label {
+    color: #cccccc;
+    font-weight: normal;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    transition: color 0.3s ease;
+  }
+
+  .checkbox-group input[type="checkbox"]:checked + label {
+    color: #00ff66;
+  }
+</style>
+</head>
+<body>
+  <nav class="navbar">
+    <a href="#" class="nav-logo">Trim-Reaper</a>
+    <ul class="nav-links">
+      <li><a href="#services">Services</a></li>
+      <li><a href="#gallery">Gallery</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+  </nav>
+
+  <header>
+    <h1>Trim-Reaper Landscaping</h1>
+    <p>We cut with precision... and style.</p>
+  </header>
+
+  <section class="services" id="services">
+    <h2 class="section-title">Our Services</h2>
+    <div class="service-cards">
+  <div class="service-card" onclick="selectService('trimming')">
+    <i class="fas fa-tree"></i>
+    <h3>Tree & Shrub Trimming</h3>
+    <p>Prune and shape trees and shrubs to maintain health and enhance curb appeal.</p>
+  </div>
+  <div class="service-card" onclick="selectService('design')">
+    <i class="fas fa-seedling"></i>
+    <h3>Garden Design</h3>
+    <p>Custom layouts and plant selection tailored to bring your vision to life.</p>
+  </div>
+  <div class="service-card" onclick="selectService('lawn')">
+    <i class="fas fa-leaf"></i>
+    <h3>Lawn Maintenance</h3>
+    <p>Reliable mowing, edging, and seasonal treatments to keep your lawn lush.</p>
+  </div>
+  <div class="service-card" onclick="selectService('irrigation')">
+    <i class="fas fa-water"></i>
+    <h3>Irrigation Systems</h3>
+    <p>Install and maintain efficient systems to keep your landscape hydrated.</p>
+  </div>
+  <div class="service-card" onclick="selectService('brush')">
+    <i class="fas fa-skull-crossbones"></i>
+    <h3>Brush Removal</h3>
+    <p>Clear overgrowth and debris to open up space and reduce fire risk.</p>
+  </div>
+  <div class="service-card" onclick="selectService('pest')">
+    <i class="fas fa-bug-slash"></i>
+    <h3>Pest & Weed Control</h3>
+    <p>Environmentally conscious treatments to keep unwanted visitors at bay.</p>
+  </div>
+</div>
+      
+      
+    </div>
+  </section>
+
+  <section class="gallery-section" id="gallery">
+  <h2 class="section-title">Gallery</h2>
+    <div class="gallery">
+      <img src="images/landscaping1.jpg" alt="Landscaping Project 1">
+      <img src="images/landscaping2.jpg" alt="Landscaping Project 2">
+      <img src="images/landscaping3.jpg" alt="Landscaping Project 3">
+      <img src="images/landscaping4.jpg" alt="Landscaping Project 4">
+      <img src="images/landscaping5.jpg" alt="Landscaping Project 5">
+      <img src="images/landscaping6.jpg" alt="Landscaping Project 6">
+      <img src="images/landscaping7.jpg" alt="Landscaping Project 7">
+      <img src="images/landscaping8.jpg" alt="Landscaping Project 8">
+      <img src="images/landscaping9.jpg" alt="Landscaping Project 9">
+      <img src="images/landscaping10.jpg" alt="Landscaping Project 10">
+      <img src="images/landscaping11.jpg" alt="Landscaping Project 11">
+      <img src="images/landscaping12.jpg" alt="Landscaping Project 12">
+    </div>
+  </section>
+
+  <section class="contact" id="contact">
+    <h2 class="section-title">Contact Us</h2>
+    <form class="contact-form">
+      <div class="form-group">
+        <label for="name">Full Name</label>
+        <input type="text" id="name" name="name" required />
+      </div>
+      <div class="form-group">
+        <label for="email">Email Address</label>
+        <input type="email" id="email" name="email" required />
+      </div>
+      <div class="form-group">
+        <label for="home-address">Home Address</label>
+        <input type="text" id="home-address" name="home-address" required />
+      </div>
+      <div class="form-group">
+        <label for="services">Select Services</label>
+        <div class="checkbox-group">
+		  <div class="checkbox-column">
+		    <label><input type="checkbox" name="services" value="trimming"> Tree & Shrub Trimming</label>
+		    <label><input type="checkbox" name="services" value="design"> Garden Design</label>
+		    <label><input type="checkbox" name="services" value="lawn"> Lawn Maintenance</label>
+		  </div>
+		  <div class="checkbox-column">
+		    <label><input type="checkbox" name="services" value="irrigation"> Irrigation Systems</label>
+		    <label><input type="checkbox" name="services" value="brush"> Brush Removal</label>
+		    <label><input type="checkbox" name="services" value="pest"> Pest & Weed Control</label>
+		  </div>
+		</div>
+      </div>
+      <div class="form-group">
+        <label for="message">Your Message</label>
+        <textarea id="message" name="message" rows="5" required></textarea>
+      </div>
+      <button type="submit">Send Message</button>
+    </form>
+  </section>
+
+  <footer>
+    &copy; 2025 Trim-Reaper Landscaping. All rights reserved.
+  </footer>
+  
+<script>
+  function selectService(serviceValue) {
+    const checkbox = document.querySelector(`input[type='checkbox'][value='${serviceValue}']`);
+    if (checkbox) checkbox.checked = true;
+    document.querySelector('#contact').scrollIntoView({ behavior: 'smooth' });
+  }
+</script>
+</body>
+</html>
+
+
