@@ -397,13 +397,51 @@ footer {
     &copy; 2025 Trim-Reaper Landscaping. All rights reserved.
   </footer>
   
-<script>
+ <script>
+  // First script block
   function selectService(serviceValue) {
     const checkbox = document.querySelector(`input[type='checkbox'][value='${serviceValue}']`);
     if (checkbox) checkbox.checked = true;
     document.querySelector('#contact').scrollIntoView({ behavior: 'smooth' });
   }
 </script>
+
+<script>
+  // Second script block
+  document.querySelector('.contact-form').addEventListener('submit', async function (e) {
+    e.preventDefault();
+
+    const name = document.querySelector('#name').value;
+    const email = document.querySelector('#email').value;
+    const address = document.querySelector('#home-address').value;
+    const message = document.querySelector('#message').value;
+
+    const services = Array.from(document.querySelectorAll('input[name="services"]:checked'))
+      .map(checkbox => checkbox.value);
+
+    const data = { name, email, address, message, services };
+
+    try {
+      const response = await fetch('http://localhost:8080/api/quotes', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(data)
+      });
+
+      if (response.ok) {
+        alert("Thank you! Your quote request has been submitted.");
+        document.querySelector('.contact-form').reset();
+      } else {
+        alert("Something went wrong. Please try again.");
+      }
+    } catch (err) {
+      console.error(err);
+      alert("There was a problem connecting to the server.");
+    }
+  });
+</script>
+ 
+
 </body>
 </html>
 
