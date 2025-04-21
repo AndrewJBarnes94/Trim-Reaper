@@ -30,6 +30,9 @@ public class Quote {
 	private LocalDateTime dateRequested;
 	private LocalDate scheduledDate;
 	
+	private String preferredDays;
+	private String preferredTimes;
+	private String urgency;
 
 	
 	// GETTERS //
@@ -69,6 +72,18 @@ public class Quote {
 	public LocalDate getScheduledDate() {
 		return scheduledDate;
 	}
+
+	public String getPreferredDays() {
+		return preferredDays;
+	}
+
+	public String getPreferredTimes() {
+		return preferredTimes;
+	}
+
+	public String getUrgency() {
+		return urgency;
+	}
 	
 	
 	// SETTERS //
@@ -107,5 +122,17 @@ public class Quote {
 	public void setScheduledDate(LocalDate scheduledDate) {
 		this.scheduledDate = scheduledDate;
 	}	
+
+	public void setPreferredDays(String preferredDays) {
+		this.preferredDays = preferredDays;
+	}
+
+	public void setPreferredTimes(String preferredTimes) {
+		this.preferredTimes = preferredTimes;
+	}
+
+	public void setUrgency(String urgency) {
+		this.urgency = urgency;
+	}
 }
 

@@ -26,17 +26,20 @@ public class QuoteController {
 	private EmailService emailService;
 	
 	@PostMapping
-	public ResponseEntity<String> receiveQuote(@RequestBody Quote quote) {
-		quote.setQuoteNumber(UUID.randomUUID().toString().substring(0, 8).toUpperCase());
-		quote.setDateRequested(LocalDateTime.now());
-		quote.setStatus("pending");
-		
-		quoteRepository.save(quote);
-		
-		emailService.sendQuoteEmail(quote.getEmail(), quote.getQuoteNumber(), quote.getId());
-		
-		return ResponseEntity.ok("Quote submitted");
-	}
+public ResponseEntity<String> receiveQuote(@RequestBody Quote quote) {
+    quote.setQuoteNumber(UUID.randomUUID().toString().substring(0, 8).toUpperCase());
+    quote.setDateRequested(LocalDateTime.now());
+    quote.setStatus("pending");
+
+    System.out.println("Received requested services: " + quote.getRequestedServices()); // DEBUG
+
+    quoteRepository.save(quote);
+
+    emailService.sendQuoteEmail(quote.getEmail(), quote.getQuoteNumber(), quote.getId());
+
+    return ResponseEntity.ok("Quote submitted");
+}
+
 	
 	@GetMapping("/quote/{id}")
 	public ResponseEntity<Quote> viewQuote(@PathVariable Long id) {
@@ -47,13 +50,16 @@ public class QuoteController {
 	
 	@PutMapping("/quote/{id}/schedule")
 	public ResponseEntity<?> scheduleQuote(@PathVariable Long id, @RequestBody Map<String, String> payload) {
-	    return quoteRepository.findById(id).map(quote -> {
-	        quote.setScheduledDate(LocalDate.parse(payload.get("date")));
-	        quote.setStatus("scheduled");
-	        quoteRepository.save(quote);
-	        return ResponseEntity.ok().build();
-	    }).orElse(ResponseEntity.notFound().build());
+		return quoteRepository.findById(id).map(quote -> {
+			quote.setPreferredDays(payload.get("preferredDays"));
+			quote.setPreferredTimes(payload.get("preferredTimes"));
+			quote.setUrgency(payload.get("urgency"));
+			quote.setStatus("awaiting_schedule");
+			quoteRepository.save(quote);
+			return ResponseEntity.ok().build();
+		}).orElse(ResponseEntity.notFound().build());
 	}
+
 
 
 }

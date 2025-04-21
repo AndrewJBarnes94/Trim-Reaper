@@ -18,11 +18,41 @@
     <div id="quote-info"></div>
 
     <h2>Schedule Your Service</h2>
-    <form id="schedule-form">
-      <label for="date">Preferred Date</label>
-      <input type="date" id="date" required />
-      <button type="submit">Submit</button>
+    <form id="schedule-form" style="margin-top: 2rem;">
+      <div style="margin-bottom: 1.5rem;">
+        <label for="urgency"><strong>How Urgent is Your Request?</strong></label>
+        <select id="urgency" style="margin-top: 0.5rem; width: 100%; padding: 0.6rem; border-radius: 6px; border: none; background: #2a2a2a; color: #eee;">
+          <option value="standard">Standard (No rush)</option>
+          <option value="soon">Soon (within 5 business days)</option>
+          <option value="urgent">Urgent (ASAP – may include extra fee)</option>
+        </select>
+      </div>
+    
+      <div style="margin-bottom: 1.5rem;">
+        <label><strong>What Days Are You Usually Available?</strong></label>
+        <div class="checkbox-group" style="margin-top: 0.5rem; display: flex; flex-wrap: wrap; gap: 10px;">
+          <label><input type="checkbox" name="days" value="Monday"> Monday</label>
+          <label><input type="checkbox" name="days" value="Tuesday"> Tuesday</label>
+          <label><input type="checkbox" name="days" value="Wednesday"> Wednesday</label>
+          <label><input type="checkbox" name="days" value="Thursday"> Thursday</label>
+          <label><input type="checkbox" name="days" value="Friday"> Friday</label>
+        </div>
+      </div>
+    
+      <div style="margin-bottom: 1.5rem;">
+        <label for="time-range"><strong>Preferred Time of Day</strong></label>
+        <select id="time-range" style="margin-top: 0.5rem; width: 100%; padding: 0.6rem; border-radius: 6px; border: none; background: #2a2a2a; color: #eee;">
+          <option value="Morning">Morning (8AM – 12PM)</option>
+          <option value="Afternoon">Afternoon (12PM – 4PM)</option>
+          <option value="Evening">Evening (4PM – 7PM)</option>
+          <option value="Any">Any time</option>
+        </select>
+      </div>
+    
+      <button type="submit" style="margin-top: 1rem; padding: 0.75rem 1.5rem; background: #00ff66; color: #121212; border: none; border-radius: 6px; font-weight: bold; font-size: 1rem; cursor: pointer;">Submit</button>
     </form>
+    
+
   </div>
 
   <script>
@@ -38,34 +68,49 @@
         <p><strong>Name:</strong> ${data.name}</p>
         <p><strong>Address:</strong> ${data.address}</p>
         <p><strong>Quote #:</strong> ${data.quoteNumber}</p>
-        <p><strong>Services:</strong> ${data.requestedService}</p>
+        <p><strong>Services:</strong> ${data.requestedServices}</p>
         <p><strong>Status:</strong> ${data.status}</p>
       `;
     })
     .catch(err => {
       document.getElementById("quote-info").innerHTML = `<p style="color:red;">Error: ${err.message}</p>`;
     });
-
+</script>
+<script>
   document.getElementById("schedule-form").addEventListener("submit", async e => {
     e.preventDefault();
-    const date = document.getElementById("date").value;
+
+    const quoteId = window.location.pathname.split("/").pop();
+    const urgency = document.getElementById("urgency").value;
+    const preferredTimes = document.getElementById("time-range").value;
+
+    const preferredDays = Array.from(document.querySelectorAll('input[name="days"]:checked'))
+      .map(cb => cb.value)
+      .join(',');
+
+    const payload = {
+      urgency,
+      preferredDays,
+      preferredTimes
+    };
 
     try {
       const response = await fetch(`/api/quotes/quote/${quoteId}/schedule`, {
         method: "PUT",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ date })
+        body: JSON.stringify(payload)
       });
 
       if (!response.ok) throw new Error("Failed to schedule");
 
-      alert("Thanks! Your service has been scheduled.");
+      alert("Thanks! We've recorded your availability and will contact you soon.");
     } catch (error) {
-      alert("Error scheduling service.");
+      alert("Error submitting schedule info.");
       console.error(error);
     }
   });
 </script>
+
 
 </body>
 </html>

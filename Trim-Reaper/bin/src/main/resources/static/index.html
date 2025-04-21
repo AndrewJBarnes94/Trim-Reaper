@@ -416,31 +416,29 @@ footer {
     const address = document.querySelector('#home-address').value;
     const message = document.querySelector('#message').value;
 
-    // Convert selected services into a comma-separated string
     const services = Array.from(document.querySelectorAll('input[name="services"]:checked'))
-      .map(checkbox => checkbox.value)
-      .join(","); // Join the array into a single string
+      .map(checkbox => checkbox.value);
 
-    const data = { name, email, address, message, requestedServices: services };
+    const data = { name, email, address, message, services };
 
     try {
-        const response = await fetch('http://localhost:8080/api/quotes', {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify(data)
-        });
+      const response = await fetch('http://localhost:8080/api/quotes', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(data)
+      });
 
-        if (response.ok) {
-            alert("Thank you! Your quote request has been submitted.");
-            document.querySelector('.contact-form').reset();
-        } else {
-            alert("Something went wrong. Please try again.");
-        }
+      if (response.ok) {
+        alert("Thank you! Your quote request has been submitted.");
+        document.querySelector('.contact-form').reset();
+      } else {
+        alert("Something went wrong. Please try again.");
+      }
     } catch (err) {
-        console.error(err);
-        alert("There was a problem connecting to the server.");
+      console.error(err);
+      alert("There was a problem connecting to the server.");
     }
-});
+  });
 </script>
  
 
