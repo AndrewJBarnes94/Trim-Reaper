@@ -1,6 +1,5 @@
 package com.brocodesoftware.trimreaper;
 
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.Map;
 import java.util.UUID;
